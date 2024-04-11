@@ -1,0 +1,29 @@
+<!-- templates/blog/home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Home</title>
+    <!-- Include any necessary CSS or JavaScript files -->
+</head>
+<body>
+    <h1>Welcome to the Blog</h1>
+    <ul>
+    {% for post in blog_posts %}
+        <li>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+            <p>Author: {{ post.author.username }}</p>
+            <a href="{% url 'like_post' post.id %}">Like</a>
+            <a href="{% url 'add_comment' post.id %}">Add Comment</a>
+            <!-- Add any additional information or actions here -->
+        </li>
+    {% endfor %}
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    </ul>
+</body>
+</html>
